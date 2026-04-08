@@ -19,19 +19,19 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin" />
         <link rel="preconnect" href="https://unpkg.com" />
         
-        <link rel="icon" type="image/jpeg" href="mathpunch.jpeg" />
+        <link rel="icon" type="image/jpeg" href="./mathpunch.jpeg" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet" />
         
-        <script src="theme.js"></script>
-        <script src="/sail/baremux/index.js"></script>
-        <script src="/sail/scram/scramjet.all.js"></script>
+        <script src="./theme.js"></script>
+        <script src="./sail/baremux/index.js"></script>
+        <script src="./sail/scram/scramjet.all.js"></script>
         
-        <script type="module" src="shader-client.js"></script>
-        <script type="module" src="shader-canvas.js"></script>
+        <script type="module" src="./shader-client.js"></script>
+        <script type="module" src="./shader-canvas.js"></script>
         
         <script><![CDATA[
             if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register("/sail/sw.js", { scope: '/sail/' })
+                navigator.serviceWorker.register("./sail/sw.js", { scope: './sail/' })
                     .catch(err => console.warn('Service Worker registration failed:', err));
             }
         ]]></script>
@@ -506,7 +506,7 @@
         <div class="bookmark-bar">
             <template x-for="bookmark in bookmarks" :key="bookmark.id">
                 <div class="bookmark-item" @click="urlInput = bookmark.url; submitUrl()">
-                    <img :src="'https://www.google.com/s2/favicons?domain=' + bookmark.url" @error="$event.target.src='mathpunch.jpeg'" alt="" />
+                    <img :src="'https://www.google.com/s2/favicons?domain=' + bookmark.url" @error="$event.target.src='data:image/svg+xml;utf8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22gray%22%3E%3Ccircle cx=%2212%22 cy=%2212%22 r=%2210%22/%3E%3C/svg%3E'" alt="" />
                     <span x-text="bookmark.name"></span>
                 </div>
             </template>
@@ -681,17 +681,17 @@
 
                     initProxy() {
                         try {
-                            const connection = new BareMux.BareMuxConnection("/sail/baremux/worker.js");
-                            connection.setTransport("/sail/libcurl/index.mjs", [{ websocket: this.scramjetServer }]);
+                            const connection = new BareMux.BareMuxConnection("./sail/baremux/worker.js");
+                            connection.setTransport("./sail/libcurl/index.mjs", [{ websocket: this.scramjetServer }]);
                             
                             const { ScramjetController } = $scramjetLoadController();
                             this.scramjetInstance = new ScramjetController({
                                 files: {
-                                    all: "/sail/scram/scramjet.all.js",
-                                    wasm: "/sail/scram/scramjet.wasm.wasm",
-                                    sync: "/sail/scram/scramjet.sync.js"
+                                    all: "./sail/scram/scramjet.all.js",
+                                    wasm: "./sail/scram/scramjet.wasm.wasm",
+                                    sync: "./sail/scram/scramjet.sync.js"
                                 },
-                                prefix: "/sail/go/"
+                                prefix: "./sail/go/"
                             });
                             this.scramjetInstance.init();
 
